@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -99,5 +100,13 @@ public class GNCarousel extends Region {
 
     public void setSubtitle(String sub){
         carousel.subtitle.setText(sub);
+    }
+
+    /**
+     * Configure effect velocity.
+     * @param duration duration of the effect.
+     */
+    public void setVelocity(Duration duration) {
+        carousel.duration = duration;
     }
 }
