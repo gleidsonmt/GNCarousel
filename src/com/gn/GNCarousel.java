@@ -21,10 +21,16 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -58,25 +64,12 @@ public class GNCarousel extends Region {
             outputClip.setHeight(newValue.getHeight());
         });
 
-        this.widthProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                carousel.setPrefWidth(newValue.doubleValue());
-            }
-        });
-        this.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                carousel.setPrefHeight(newValue.doubleValue());
-            }
-        });
+        this.widthProperty().addListener((observable, oldValue, newValue) -> carousel.setPrefWidth(newValue.doubleValue()));
+        this.heightProperty().addListener((observable, oldValue, newValue) -> carousel.setPrefHeight(newValue.doubleValue()));
 
-        carousel.items.addListener(new ListChangeListener<Node>() {
-            @Override
-            public void onChanged(Change<? extends Node> c) {
-                if(carousel.currentView.getChildren().isEmpty()){
-                    carousel.currentView.getChildren().add(carousel.items.get(0));
-                }
+        carousel.items.addListener((ListChangeListener<Node>) c -> {
+            if(carousel.currentView.getChildren().isEmpty()){
+                carousel.currentView.getChildren().add(carousel.items.get(0));
             }
         });
     }
@@ -108,5 +101,9 @@ public class GNCarousel extends Region {
      */
     public void setVelocity(Duration duration) {
         carousel.duration = duration;
+    }
+
+    public void setCycleCount(long delay, long period){
+        carousel.cycle(delay, period);
     }
 }

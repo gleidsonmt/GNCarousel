@@ -19,6 +19,7 @@ package com.gn;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.DefaultProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -37,6 +38,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -60,15 +64,26 @@ public class GNContainer extends AnchorPane {
             Text        title;
             Text        subtitle;
 
+    private Timeline    transition  = new Timeline();
             Duration    duration    = Duration.millis(300);
     private double      division    = 0;
     private int         direction   = -1;
     private int         oldId       = 0;
 
+    private TimerTask timerTask = new TimerTask() {
+        @Override
+        public void run() {
+            Platform.runLater( () -> next());
+        }
+    };
+
+
+
     ObservableList<Node> items = FXCollections.observableArrayList();
 
     GNContainer() {
         super();
+
         this.currentView = new StackPane();
         this.nextView = new StackPane();
         this.left_button = new Button("left");
@@ -117,6 +132,11 @@ public class GNContainer extends AnchorPane {
                 btn.getStyleClass().add("ind-" + i);
                 btn.setOnMouseClicked(event -> {
                     int id = Integer.valueOf(btn.getId());
+
+                    if(!btn.isSelected()){
+                        btn.setSelected(true);
+                        return;
+                    }
 
                     if(division % 2 == 0){
                         if (Integer.valueOf(btn.getId()) < division){
@@ -171,31 +191,38 @@ public class GNContainer extends AnchorPane {
 
         right_button.setOnMouseClicked(event -> {
             if(event.getClickCount() != 2){
-                System.out.println(oldId + ", " +(items.size() - 1) );
-                if(oldId == items.size() - 1){
-                    direction = 1;
-                    effect(direction, 0);
-                    group.selectToggle(group.getToggles().get(0));
-                } else if(oldId < (items.size() - 1)){
-                    direction = 1;
-                    effect(direction, ++oldId);
-                    group.selectToggle(group.getToggles().get(oldId));
-                }
+                next();
             }
         });
         left_button.setOnMouseClicked(event -> {
             if(event.getClickCount() != 2) {
-                if(oldId == 0){
-                    direction = -1;
-                    effect(direction, (items.size() - 1));
-                    group.selectToggle(group.getToggles().get(oldId));
-                } else if (oldId > 0) {
-                    direction = -1;
-                    effect(direction, --oldId);
-                    group.selectToggle(group.getToggles().get(oldId));
-                }
+               previous();
             }
         });
+    }
+
+    private void next(){
+        if(oldId == items.size() - 1){
+            direction = 1;
+            effect(direction, 0);
+            group.selectToggle(group.getToggles().get(0));
+        } else if(oldId < (items.size() - 1)){
+            direction = 1;
+            effect(direction, ++oldId);
+            group.selectToggle(group.getToggles().get(oldId));
+        }
+    }
+
+    private void previous(){
+        if(oldId == 0){
+            direction = -1;
+            effect(direction, (items.size() - 1));
+            group.selectToggle(group.getToggles().get(oldId));
+        } else if (oldId > 0) {
+            direction = -1;
+            effect(direction, --oldId);
+            group.selectToggle(group.getToggles().get(oldId));
+        }
     }
 
     private void composeLayout(){
@@ -246,6 +273,8 @@ public class GNContainer extends AnchorPane {
 
     }
 
+
+
     private void effect(int direction, int view){
 
         nextView.getChildren().clear();
@@ -254,9 +283,10 @@ public class GNContainer extends AnchorPane {
 
         this.direction = direction;
 
+        transition.getKeyFrames().clear();
+
         if(direction == 1){
 
-            Timeline transition = new Timeline();
             transition.getKeyFrames().addAll(
                     new KeyFrame(Duration.ZERO, new KeyValue(currentView.translateXProperty(), 0)),
                     new KeyFrame(Duration.ZERO, new KeyValue(nextView.translateXProperty(), this.getPrefWidth())),
@@ -275,9 +305,8 @@ public class GNContainer extends AnchorPane {
             });
         } else {
 
-            nextView.setTranslateX(-640);
+            nextView.setTranslateX(this.getPrefWidth() * -1);
 
-            Timeline transition = new Timeline();
             transition.getKeyFrames().addAll(
                     new KeyFrame(Duration.ZERO, new KeyValue(currentView.translateXProperty(), 0)),
                     new KeyFrame(Duration.ZERO, new KeyValue(nextView.translateXProperty(), this.getPrefWidth() * - 1)),
@@ -297,4 +326,7 @@ public class GNContainer extends AnchorPane {
         }
     }
 
+    void cycle(long delay, long period){
+        new Timer().schedule(timerTask, delay, period);
+    }
 }
