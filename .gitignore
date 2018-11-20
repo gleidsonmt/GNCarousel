@@ -1,0 +1,6 @@
+./gitignore
+.idea/**
+/documentation/**
+scenicView.properties
+GNCarousel.iml
+/out/**
