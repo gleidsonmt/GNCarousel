@@ -103,7 +103,39 @@ public class GNCarousel extends Region {
         carousel.duration = duration;
     }
 
-    public void setCycleCount(long delay, long period){
-        carousel.cycle(delay, period);
+    /**
+     * Select the next item.
+     */
+    public void next(){
+        carousel.next();
+    }
+
+    /**
+     * Select the previous item.
+     */
+    public void previous(){
+        carousel.previous();
+    }
+
+    /**
+     * Select the first item.
+     */
+    public void first(){
+        carousel.first();
+    }
+
+    /**
+     * Select the last item.
+     */
+    public void last(){
+        carousel.last();
+    }
+
+    /**
+     * Select the medium item.
+     * if even, select the next.
+     */
+    public void medium(){
+        carousel.medium();
     }
 }

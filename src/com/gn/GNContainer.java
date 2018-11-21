@@ -19,7 +19,6 @@ package com.gn;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.beans.DefaultProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -38,9 +37,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 /**
@@ -69,14 +65,6 @@ public class GNContainer extends AnchorPane {
     private double      division    = 0;
     private int         direction   = -1;
     private int         oldId       = 0;
-
-    private TimerTask timerTask = new TimerTask() {
-        @Override
-        public void run() {
-            Platform.runLater( () -> next());
-        }
-    };
-
 
 
     ObservableList<Node> items = FXCollections.observableArrayList();
@@ -201,7 +189,7 @@ public class GNContainer extends AnchorPane {
         });
     }
 
-    private void next(){
+    void next(){
         if(oldId == items.size() - 1){
             direction = 1;
             effect(direction, 0);
@@ -213,7 +201,7 @@ public class GNContainer extends AnchorPane {
         }
     }
 
-    private void previous(){
+    void previous(){
         if(oldId == 0){
             direction = -1;
             effect(direction, (items.size() - 1));
@@ -223,6 +211,21 @@ public class GNContainer extends AnchorPane {
             effect(direction, --oldId);
             group.selectToggle(group.getToggles().get(oldId));
         }
+    }
+
+    void first(){
+        effect(direction, 0);
+        group.selectToggle(group.getToggles().get(0));
+    }
+
+    void last(){
+        effect(direction, items.size() -1);
+        group.selectToggle(group.getToggles().get(items.size()-1));
+    }
+
+    void medium(){
+        effect(direction, (int) division);
+        group.selectToggle(group.getToggles().get((int) division));
     }
 
     private void composeLayout(){
@@ -324,9 +327,5 @@ public class GNContainer extends AnchorPane {
                 nextView.getChildren().clear();
             });
         }
-    }
-
-    void cycle(long delay, long period){
-        new Timer().schedule(timerTask, delay, period);
     }
 }
