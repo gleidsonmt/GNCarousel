@@ -17,20 +17,12 @@
 package com.gn;
 
 import javafx.beans.DefaultProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
