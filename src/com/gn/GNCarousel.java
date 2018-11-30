@@ -33,7 +33,8 @@ import javafx.util.Duration;
 @DefaultProperty("children")
 public class GNCarousel extends Region {
 
-    private final static String USER_AGENT_STYELESHEET = GNCarousel.class.getResource("/com/gn/carousel.css").toExternalForm();
+    private final static String USER_AGENT_STYELESHEET
+            = GNCarousel.class.getResource("/com/gn/carousel.css").toExternalForm();
 
     private GNContainer carousel;
 

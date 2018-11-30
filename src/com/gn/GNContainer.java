@@ -42,7 +42,6 @@ import javafx.util.Duration;
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  18/11/2018
- * Version 1.0
  */
 
 @DefaultProperty("children")
@@ -224,7 +223,7 @@ public class GNContainer extends AnchorPane {
     }
 
     void medium(){
-        effect(direction, (int) division);
+        effect(direction, (int) division); // get Absolute number
         group.selectToggle(group.getToggles().get((int) division));
     }
 
@@ -246,8 +245,6 @@ public class GNContainer extends AnchorPane {
         overBottom(wrapper);
         overLeft(left_button);
         overRight(right_button);
-//        overBottom(box_indicators);
-//        overBottom(indicators);
     }
 
     private void overlap(Node node){
@@ -273,10 +270,7 @@ public class GNContainer extends AnchorPane {
         AnchorPane.setRightAnchor(node, 0D);
         AnchorPane.setBottomAnchor(node, 0D);
         AnchorPane.setLeftAnchor(node, 0D);
-
     }
-
-
 
     private void effect(int direction, int view){
 
