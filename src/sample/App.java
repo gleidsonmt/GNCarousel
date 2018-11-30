@@ -17,25 +17,21 @@
 package sample;
 
 import com.gn.GNCarousel;
-import com.gn.GNContainer;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.scenicview.ScenicView;
+import javafx.util.Duration;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
- * Create on  18/11/2018
+ * Create on  19/11/2018
  * Version 1.0
  */
 public class App extends Application {
@@ -45,12 +41,14 @@ public class App extends Application {
         GNCarousel carousel = new GNCarousel();
         carousel.setTitle("Carousel");
         carousel.setSubtitle("This is a subtitle.");
+        carousel.setVelocity(Duration.millis(500D));
         carousel.getItems().setAll(createItems());
+        carousel.medium();
         Scene scene = new Scene(new StackPane(carousel), 600, 400);
         stage.setScene(scene);
         stage.show();
 
-        ScenicView.show(scene);
+//        ScenicView.show(scene);
 
     }
 
@@ -87,5 +85,9 @@ public class App extends Application {
         v5.setStyle("-fx-background-color : #EC407A;");
 
         return FXCollections.observableArrayList(v1, v2, v3, v4, v5);
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
