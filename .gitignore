@@ -1,6 +1,7 @@
 ./gitignore
 .idea/**
+/out/**
 /documentation/**
+/META-INF/**
 scenicView.properties
 GNCarousel.iml
-/out/**

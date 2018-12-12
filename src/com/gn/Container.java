@@ -45,7 +45,7 @@ import javafx.util.Duration;
  */
 
 @DefaultProperty("children")
-public class GNContainer extends AnchorPane {
+public class Container extends AnchorPane {
 
             StackPane   currentView;
     private StackPane   nextView;
@@ -68,7 +68,7 @@ public class GNContainer extends AnchorPane {
 
     ObservableList<Node> items = FXCollections.observableArrayList();
 
-    GNContainer() {
+    Container() {
         super();
 
         this.currentView = new StackPane();

@@ -25,19 +25,24 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 /**
+ *
+ * The carousel is a control of the overlapping layer, which navigates about her, showing one for once.
+ * First, he creates a skin with one clip and your indices, when navigating between the views one event is shot
+ * positioning the next view to side left or right, during the event the next view pushes the actual view to the side
+ * left or right.
+ *
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  18/11/2018
- *
  */
 
 @DefaultProperty("children")
 public class GNCarousel extends Region {
 
-    private GNContainer carousel;
+    private Container carousel;
 
     public GNCarousel(){
         super();
-        carousel = new GNContainer();
+        carousel = new Container();
         this.getChildren().add(carousel);
 
         double prefWidth = 200;
