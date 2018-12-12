@@ -286,8 +286,8 @@ public class GNContainer extends AnchorPane {
 
             transition.getKeyFrames().addAll(
                     new KeyFrame(Duration.ZERO, new KeyValue(currentView.translateXProperty(), 0)),
-                    new KeyFrame(Duration.ZERO, new KeyValue(nextView.translateXProperty(), this.getPrefWidth())),
-                    new KeyFrame(duration, new KeyValue(currentView.translateXProperty(), this.getPrefWidth() * -1)),
+                    new KeyFrame(Duration.ZERO, new KeyValue(nextView.translateXProperty(), this.getWidth())),
+                    new KeyFrame(duration, new KeyValue(currentView.translateXProperty(), this.getWidth() * -1)),
                     new KeyFrame(duration, new KeyValue(nextView.translateXProperty(), 0))
             );
 
@@ -306,8 +306,8 @@ public class GNContainer extends AnchorPane {
 
             transition.getKeyFrames().addAll(
                     new KeyFrame(Duration.ZERO, new KeyValue(currentView.translateXProperty(), 0)),
-                    new KeyFrame(Duration.ZERO, new KeyValue(nextView.translateXProperty(), this.getPrefWidth() * - 1)),
-                    new KeyFrame(duration, new KeyValue(currentView.translateXProperty(), this.getPrefWidth())),
+                    new KeyFrame(Duration.ZERO, new KeyValue(nextView.translateXProperty(), this.getWidth() * - 1)),
+                    new KeyFrame(duration, new KeyValue(currentView.translateXProperty(), this.getWidth())),
                     new KeyFrame(duration, new KeyValue(nextView.translateXProperty(), 0))
             );
 
