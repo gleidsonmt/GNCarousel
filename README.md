@@ -22,12 +22,12 @@
 
 <h1></h1>
 
-
+<h5>Basic Usage</h5>
 
 ```java
-  GNCarousel carousel = new GNCarousel();
-  carousel.setTitle("Carousel");
-  carousel.setSubtitle("This is a subtitle.");
-  carousel.setVelocity(Duration.millis(500D));
-  carousel.getItems().setAll(createItems());
+GNCarousel carousel = new GNCarousel();
+carousel.setTitle("Carousel");
+carousel.setSubtitle("This is a subtitle.");
+carousel.setVelocity(Duration.millis(500D));
+carousel.getItems().setAll(createItems());
 ```
