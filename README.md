@@ -1,12 +1,16 @@
 
-# GNCarousel
-### The carousel is a control of the overlapping layer, which navigates about her, showing one for once.
+<h1 align="center"> GNCarousel</h1>
 
-#
+
 <p align="center">
   <img src="src/logo.png"  />
 </p>
-#
+
+
+<h5 align="center"> 
+  The carousel is a control of the overlapping layer, which navigates about her, showing one for once.
+</h5>
+
 
 
 
