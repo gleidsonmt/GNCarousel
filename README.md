@@ -1,8 +1,9 @@
 
 # GNCarousel
+### The carousel is a control of the overlapping layer, which navigates about her, showing one for once.
 ![Guide](src/view.gif)
 
-### The carousel is a control of the overlapping layer, which navigates about her, showing one for once.
+
 
 
 ![skeleton](src/model.jpg)
