@@ -2,7 +2,7 @@
 # GNCarousel
 ### The carousel is a control of the overlapping layer, which navigates about her, showing one for once.
 
-<img src="src/view.gif" align="middle" />
+<div text-align="center"><img src="src/view.gif" align="middle" /></div>
 
 
 ![skeleton](src/model.jpg)
