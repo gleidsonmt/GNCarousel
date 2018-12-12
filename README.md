@@ -1,5 +1,4 @@
 
-<h1 align="center"> GNCarousel</h1>
 
 
 <p align="center">
@@ -12,6 +11,7 @@
 </h5>
 
 
+<h1 align="center"> GNCarousel</h1>
 
 
 
