@@ -27,14 +27,11 @@ import javafx.util.Duration;
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  18/11/2018
- * Version 1.0
+ *
  */
 
 @DefaultProperty("children")
 public class GNCarousel extends Region {
-
-    private final static String USER_AGENT_STYELESHEET
-            = GNCarousel.class.getResource("/com/gn/carousel.css").toExternalForm();
 
     private GNContainer carousel;
 
@@ -43,8 +40,13 @@ public class GNCarousel extends Region {
         carousel = new GNContainer();
         this.getChildren().add(carousel);
 
-        this.setPrefWidth(300);
-        this.setPrefHeight(300);
+        double prefWidth = 200;
+        double prefHeight = 200;
+
+        this.setPrefWidth(prefWidth);
+        this.setPrefHeight(prefHeight);
+        carousel.setPrefWidth(prefWidth);
+        carousel.setPrefHeight(prefHeight);
 
         // add clip
         Rectangle outputClip = new Rectangle();
@@ -52,32 +54,14 @@ public class GNCarousel extends Region {
         outputClip.setArcHeight(0);
         carousel.setClip(outputClip);
 
-        carousel.layoutBoundsProperty().addListener((ov, oldValue, newValue) -> {
-            outputClip.setWidth(newValue.getWidth());
-            outputClip.setHeight(newValue.getHeight());
-        });
-
-        this.widthProperty().addListener((observable, oldValue, newValue) -> carousel.setPrefWidth(newValue.doubleValue()));
-        this.heightProperty().addListener((observable, oldValue, newValue) -> carousel.setPrefHeight(newValue.doubleValue()));
+        outputClip.widthProperty().bind(widthProperty());
+        outputClip.heightProperty().bind(heightProperty());
 
         carousel.items.addListener((ListChangeListener<Node>) c -> {
             if(carousel.currentView.getChildren().isEmpty()){
                 carousel.currentView.getChildren().add(carousel.items.get(0));
             }
         });
-    }
-
-    /**
-     * Items to visualize.
-     * @return items.
-     */
-    public ObservableList<Node> getItems(){
-        return carousel.items;
-    }
-
-    @Override
-    public String getUserAgentStylesheet() {
-        return USER_AGENT_STYELESHEET;
     }
 
     public void setTitle(String title){
@@ -130,5 +114,47 @@ public class GNCarousel extends Region {
      */
     public void medium(){
         carousel.medium();
+    }
+
+    /**
+     * Items to visualize.
+     * @return items.
+     */
+    public ObservableList<Node> getItems(){
+        return carousel.items;
+    }
+
+    @Override
+    public String getUserAgentStylesheet() {
+        return GNCarousel.class.getResource("/com/gn/carousel.css").toExternalForm();
+    }
+
+    @Override
+    protected double computeMinWidth(double height) {
+        return carousel.minWidth(height);
+    }
+
+    @Override
+    protected double computeMinHeight(double width) {
+        return carousel.minHeight(width);
+    }
+
+    @Override
+    protected double computePrefWidth(double height) {
+        return carousel.prefWidth(height) + snappedLeftInset() + snappedRightInset();
+    }
+
+    @Override
+    protected double computePrefHeight(double width) {
+        return carousel.prefHeight(width) + snappedTopInset() + snappedBottomInset();
+    }
+
+    @Override
+    protected void layoutChildren() {
+        final double x = snappedLeftInset();
+        final double y = snappedTopInset();
+        final double w = getWidth() - (snappedLeftInset() + snappedRightInset());
+        final double h = getHeight() - (snappedTopInset() + snappedBottomInset());
+        carousel.resizeRelocate(x, y, w, h);
     }
 }
