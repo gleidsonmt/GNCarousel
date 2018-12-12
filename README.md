@@ -3,7 +3,7 @@
 ### The carousel is a control of the overlapping layer, which navigates about her, showing one for once.
 ![Guide](src/view.gif)
 
-
+<img src="src/view.gif" align="middle" />
 
 
 ![skeleton](src/model.jpg)
