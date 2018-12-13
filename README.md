@@ -1,4 +1,6 @@
 
+[![HitCount](http://hits.dwyl.io/Gleidson28/GNCarousel.svg)](http://hits.dwyl.io/Gleidson28/GNCarousel)
+
 <h1></h1>
 
 <p align="center">
