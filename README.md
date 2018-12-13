@@ -1,5 +1,8 @@
 
-[![HitCount](http://hits.dwyl.io/Gleidson28/GNCarousel.svg)](http://hits.dwyl.io/Gleidson28/GNCarousel)
+![Version](https://img.shields.io/badge/Version-1.1.0-green.svg?style=for-the-badge)
+[![Release](https://img.shields.io/badge/Release-v1.0--alpha-blue.svg?style=for-the-badge)](https://github.com/Gleidson28/GNCarousel/releases/tag/1.0)
+[![License](https://img.shields.io/github/license/Gleidson28/GNCarousel.svg?style=for-the-badge)](https://github.com/Gleidson28/GNCarousel/blob/master/LICENSE) 
+
 
 <h1></h1>
 
