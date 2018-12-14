@@ -41,4 +41,4 @@ carousel.getItems().setAll(createItems());
 
 <h5>View</h5>
 
-<div text-align="center"><img src="src/view.gif" align="middle" /></div>
+<p align="center"><img src="src/view.gif"/></p>
