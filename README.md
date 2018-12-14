@@ -11,7 +11,7 @@
 </p>
 
 <h1></h1>
-<h6 align="center"> This project is part of the set of custom components created for JavaFx </h6>
+<h6 align="center"> This project is part of the set of custom components created for JavaFx. </h6>
 
 <h1></h1>
 
