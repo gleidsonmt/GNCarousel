@@ -16,150 +16,73 @@
  */
 package com.gn;
 
-import javafx.beans.DefaultProperty;
-import javafx.collections.ListChangeListener;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.AccessibleRole;
 import javafx.scene.Node;
-import javafx.scene.layout.Region;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
+import javafx.scene.control.Skin;
 
 /**
- *
- * The carousel is a control of the overlapping layer, which navigates about her, showing one for once.
- * First, he creates a skin with one clip and your indices, when navigating between the views one event is shot
- * positioning the next view to side left or right, during the event the next view pushes the actual view to the side
- * left or right.
- *
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
- * Create on  18/11/2018
+ * Create on  29/12/2018
  */
+public class GNCarousel extends GNCarouselBase {
 
-@DefaultProperty("children")
-public class GNCarousel extends Region {
+    private static final String DEFAULT_STYLE_CLASS = "gn-carousel";
 
-    private Container carousel;
+    private ObjectProperty<ObservableList<Node>> items;
+
+    private BooleanProperty arrows = new SimpleBooleanProperty(this, "arrows", true);
+    private BooleanProperty autoRide = new SimpleBooleanProperty(this, "autoRide", false);
 
     public GNCarousel(){
-        super();
-        carousel = new Container();
-        this.getChildren().add(carousel);
-
-        double prefWidth = 200;
-        double prefHeight = 200;
-
-        this.setPrefWidth(prefWidth);
-        this.setPrefHeight(prefHeight);
-        carousel.setPrefWidth(prefWidth);
-        carousel.setPrefHeight(prefHeight);
-
-        // add clip
-        Rectangle outputClip = new Rectangle();
-        outputClip.setArcWidth(0);
-        outputClip.setArcHeight(0);
-        carousel.setClip(outputClip);
-
-        outputClip.widthProperty().bind(widthProperty());
-        outputClip.heightProperty().bind(heightProperty());
-
-        carousel.items.addListener((ListChangeListener<Node>) c -> {
-            if(carousel.currentView.getChildren().isEmpty()){
-                carousel.currentView.getChildren().add(carousel.items.get(0));
-            }
-        });
+        this(FXCollections.observableArrayList());
     }
 
-    public void setTitle(String title){
-        carousel.title.setText(title);
+    public GNCarousel(ObservableList<Node> items) {
+        initialize();
+        setAccessibleRole(AccessibleRole.NODE);
+        setItems(items);
     }
 
-    public void setSubtitle(String sub){
-        carousel.subtitle.setText(sub);
-    }
-
-    /**
-     * Configure effect velocity.
-     * @param duration duration of the effect.
-     */
-    public void setVelocity(Duration duration) {
-        carousel.duration = duration;
-    }
-
-    /**
-     * Select the next item.
-     */
-    public void next(){
-        carousel.next();
-    }
-
-    /**
-     * Select the previous item.
-     */
-    public void previous(){
-        carousel.previous();
-    }
-
-    /**
-     * Select the first item.
-     */
-    public void first(){
-        carousel.first();
-    }
-
-    /**
-     * Select the last item.
-     */
-    public void last(){
-        carousel.last();
-    }
-
-    /**
-     * Select the medium item.
-     * if even, select the next.
-     */
-    public void medium(){
-        carousel.medium();
-    }
-
-    /**
-     * Items to visualize.
-     * @return items.
-     */
-    public ObservableList<Node> getItems(){
-        return carousel.items;
+    private void initialize(){
+        this.getStyleClass().add(DEFAULT_STYLE_CLASS);
     }
 
     @Override
-    public String getUserAgentStylesheet() {
-        return GNCarousel.class.getResource("/com/gn/carousel.css").toExternalForm();
+    protected Skin<?> createDefaultSkin() {
+        return new GNCarouselSkin(this);
     }
 
-    @Override
-    protected double computeMinWidth(double height) {
-        return carousel.minWidth(height);
+    public final ObservableList<Node> getItems() {
+        return items == null ? null : items.get();
     }
 
-    @Override
-    protected double computeMinHeight(double width) {
-        return carousel.minHeight(width);
+    public void setItems(ObservableList<Node> items) {
+        this.itemsProperty().set(items);
     }
 
-    @Override
-    protected double computePrefWidth(double height) {
-        return carousel.prefWidth(height) + snappedLeftInset() + snappedRightInset();
+    public final ObjectProperty<ObservableList<Node>> itemsProperty() {
+        if (items == null) {
+            items = new SimpleObjectProperty<>(this, "items");
+        }
+        return items;
     }
 
-    @Override
-    protected double computePrefHeight(double width) {
-        return carousel.prefHeight(width) + snappedTopInset() + snappedBottomInset();
+    public boolean isArrows() {
+        return arrows.get();
     }
 
-    @Override
-    protected void layoutChildren() {
-        final double x = snappedLeftInset();
-        final double y = snappedTopInset();
-        final double w = getWidth() - (snappedLeftInset() + snappedRightInset());
-        final double h = getHeight() - (snappedTopInset() + snappedBottomInset());
-        carousel.resizeRelocate(x, y, w, h);
+    public BooleanProperty arrowsProperty() {
+        return arrows;
+    }
+
+    public void setArrows(boolean arrows) {
+        this.arrows.set(arrows);
     }
 }
+
