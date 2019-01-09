@@ -37,6 +37,14 @@ carousel.setAutoRide(true);
 carousel.setItems(createItems());
 ```
 
+<h5>Inline css  </h5>
+
+```java
+ -gn-auto-ride : true;
+ -gn-transition-duration : 300m;
+```
+<h5>View</h5>
+
 <h1></h1>
 
 <h5>View</h5>
