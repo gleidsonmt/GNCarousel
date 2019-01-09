@@ -31,10 +31,10 @@
 
 ```java
 GNCarousel carousel = new GNCarousel();
-carousel.setTitle("Carousel");
-carousel.setSubtitle("This is a subtitle.");
-carousel.setVelocity(Duration.millis(500D));
-carousel.getItems().setAll(createItems());
+carousel.setItems(createItems());
+carousel.setArrows(true);
+carousel.setAutoRide(true);
+carousel.setItems(createItems());
 ```
 
 <h1></h1>
