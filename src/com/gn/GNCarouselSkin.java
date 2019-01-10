@@ -146,81 +146,10 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
             }
         }
 
+        initListener();
 
         items.addListener((ListChangeListener<Node>) c -> {
-
-            indicators.getChildren().clear(); // replace sample indicators
-
-            if(currentView.getChildren().isEmpty()){ // add first view
-                currentView.getChildren().add(items.get(0));
-            }
-
-            division = items.size() / 2D;
-
-            for(int i = 0; i < items.size();i++){
-                ToggleButton btn = new ToggleButton();
-                btn.setId(String.valueOf(i));
-                btn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                btn.setToggleGroup(group);
-
-                btn.getStyleClass().add("ind-" + i);
-                btn.setOnMouseClicked(event -> {
-                    int id = Integer.valueOf(btn.getId());
-
-                    if(!btn.isSelected()){
-                        btn.setSelected(true);
-                        return;
-                    }
-
-                    if(division % 2 == 0){
-                        if (Integer.valueOf(btn.getId()) < division){
-                            if(oldId >= 0 && id != oldId){
-                                if(id > oldId){
-                                    effect(1, Integer.valueOf(btn.getId()));
-                                } else {
-                                    effect(-1, Integer.valueOf(btn.getId()));
-                                }
-                            }
-                        } else if (Integer.valueOf(btn.getId()) >= division){
-
-                            if(id < items.size() && id != oldId) { // equalise indices
-
-                                if (id < oldId) {
-                                    effect(-1, Integer.valueOf(btn.getId()));
-                                } else {
-                                    effect(1, Integer.valueOf(btn.getId()));
-                                }
-                            }
-                        }
-                    } else {
-                        if (Integer.valueOf(btn.getId()) == (int) division) {
-                            if(id != oldId) {
-                                effect(direction * -1, Integer.valueOf(btn.getId()));
-                            }
-                        }  else if(Integer.valueOf(btn.getId()) < (int) division) {
-                            if(oldId >= 0 && id != oldId){
-
-                                if(id > oldId){
-                                    effect(1, Integer.valueOf(btn.getId()));
-                                } else {
-                                    effect(-1, Integer.valueOf(btn.getId()));
-                                }
-                            }
-                        } else {
-                            if(id < items.size() && id != oldId) { // equalise indices
-
-                                if (id < oldId) {
-                                    effect(-1, Integer.valueOf(btn.getId()));
-                                } else {
-                                    effect(1, Integer.valueOf(btn.getId()));
-                                }
-                            }
-                        }
-                    }
-                });
-                group.selectToggle(group.getToggles().get(0));
-                indicators.getChildren().add(btn);
-            }
+            initListener();
         });
 
         right_button.setOnMouseClicked(event -> {
@@ -238,6 +167,85 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
 //        items.setAll(createItems());
 
 
+    }
+
+    private void initListener(){
+
+//            indicators.getChildren().clear(); // replace sample indicators
+
+
+        if(currentView.getChildren().isEmpty()){ // add first view
+            currentView.getChildren().add(items.get(0));
+        }
+
+        division = items.size() / 2D;
+
+        System.out.println("akkki " + items.size());
+
+        for(int i = 0; i < items.size();i++){
+            ToggleButton btn = new ToggleButton();
+            btn.setId(String.valueOf(i));
+            btn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            btn.setToggleGroup(group);
+
+            btn.getStyleClass().add("ind-" + i);
+            btn.setOnMouseClicked(event -> {
+                int id = Integer.valueOf(btn.getId());
+
+                if(!btn.isSelected()){
+                    btn.setSelected(true);
+                    return;
+                }
+
+                if(division % 2 == 0){
+                    if (Integer.valueOf(btn.getId()) < division){
+                        if(oldId >= 0 && id != oldId){
+                            if(id > oldId){
+                                effect(1, Integer.valueOf(btn.getId()));
+                            } else {
+                                effect(-1, Integer.valueOf(btn.getId()));
+                            }
+                        }
+                    } else if (Integer.valueOf(btn.getId()) >= division){
+
+                        if(id < items.size() && id != oldId) { // equalise indices
+
+                            if (id < oldId) {
+                                effect(-1, Integer.valueOf(btn.getId()));
+                            } else {
+                                effect(1, Integer.valueOf(btn.getId()));
+                            }
+                        }
+                    }
+                } else {
+                    if (Integer.valueOf(btn.getId()) == (int) division) {
+                        if(id != oldId) {
+                            effect(direction * -1, Integer.valueOf(btn.getId()));
+                        }
+                    }  else if(Integer.valueOf(btn.getId()) < (int) division) {
+                        if(oldId >= 0 && id != oldId){
+
+                            if(id > oldId){
+                                effect(1, Integer.valueOf(btn.getId()));
+                            } else {
+                                effect(-1, Integer.valueOf(btn.getId()));
+                            }
+                        }
+                    } else {
+                        if(id < items.size() && id != oldId) { // equalise indices
+
+                            if (id < oldId) {
+                                effect(-1, Integer.valueOf(btn.getId()));
+                            } else {
+                                effect(1, Integer.valueOf(btn.getId()));
+                            }
+                        }
+                    }
+                }
+            });
+            group.selectToggle(group.getToggles().get(0));
+            indicators.getChildren().add(btn);
+        }
     }
 
     private ObservableList<Node> createItems(){
@@ -483,8 +491,6 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
     protected double computePrefHeight(double width, double topInset, double rightInset, double bottomInset, double leftInset) {
         return container.prefHeight(width) + topInset + bottomInset;
     }
-
-
 
     private void createNewTimer(){
         timer = new Timer();
