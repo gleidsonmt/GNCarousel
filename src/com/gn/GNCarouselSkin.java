@@ -142,6 +142,7 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
         }
 
         initListener();
+        next(); // add first view
 
         items.addListener((ListChangeListener<Node>) c -> {
             initListener();
@@ -166,7 +167,11 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
 
         division = items.size() / 2D;
 
+
         for(int i = 0; i < items.size();i++){
+
+            System.out.println(items.get(i));
+
             ToggleButton btn = new ToggleButton();
             btn.setId(String.valueOf(i));
             btn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -258,7 +263,6 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
         overLeft(left_button);
         overRight(right_button);
 
-
         registerChangeListener(control.arrowsProperty(), "VISIBLE_ARROWS");
         registerChangeListener(control.autoRideProperty(), "AUTO_RIDE");
 
@@ -270,7 +274,6 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
             control.addEventHandler(MouseEvent.MOUSE_EXITED, exited);
             control.addEventHandler(MouseEvent.MOUSE_ENTERED, entered);
         }
-
     }
 
     private void overlap(Node node){

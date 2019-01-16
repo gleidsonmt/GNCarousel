@@ -41,18 +41,21 @@ public class App extends Application {
         GNCarousel carousel = new GNCarousel();
 //        carousel.getItems().setAll(createItems());
         carousel.setArrows(true);
-        carousel.setAutoRide(true);
+//        carousel.setAutoRide(true);
+//
+//        Label odd = new Label("Six");
+//        odd.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
+//        VBox v1 = new VBox(odd);
+//        v1.setStyle("-fx-background-color : yellow;");
+//        v1.setAlignment(Pos.CENTER);
+//        carousel.getItems().add(new Label("dfasdf"));
+//        carousel.getItems().add(v1);
 
         Scene scene = new Scene(new StackPane(carousel), 600, 400);
         stage.setScene(scene);
         stage.show();
 
-//        Label odd = new Label("Six");
-//        odd.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
-//        VBox v1 = new VBox(odd);
-//        v1.setStyle("-fx-background-color : Yellow;");
-//        v1.setAlignment(Pos.CENTER);
-//        carousel.getItems().add(v1);
+
 
 //        ScenicView.show(scene);
 
