@@ -1,7 +1,7 @@
 
 .gn-carousel
 {
-    -fx-background-color : rgba(0,0,0,.4);
+    -fx-background-color : rgba(0,0,0,.2);
 }
 
 .gn-carousel > .button

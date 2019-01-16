@@ -24,12 +24,8 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -43,7 +39,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
-import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 
 import java.util.Objects;
@@ -163,24 +158,13 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
                 previous();
             }
         });
-
-//        items.setAll(createItems());
-
-
     }
 
     private void initListener(){
 
-//            indicators.getChildren().clear(); // replace sample indicators
-
-
-        if(currentView.getChildren().isEmpty()){ // add first view
-            currentView.getChildren().add(items.get(0));
-        }
+//        indicators.getChildren().clear(); // replace sample indicators
 
         division = items.size() / 2D;
-
-        System.out.println("akkki " + items.size());
 
         for(int i = 0; i < items.size();i++){
             ToggleButton btn = new ToggleButton();
@@ -246,41 +230,6 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
             group.selectToggle(group.getToggles().get(0));
             indicators.getChildren().add(btn);
         }
-    }
-
-    private ObservableList<Node> createItems(){
-
-        Label lb1 = new Label("First");
-        Label lb2 = new Label("Second");
-        Label lb3 = new Label("Third");
-        Label lb4 = new Label("Fourth");
-        Label lb5 = new Label("Fifth");
-
-        lb1.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
-        lb2.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
-        lb3.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
-        lb4.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
-        lb5.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
-
-        VBox v1 = new VBox(lb1);
-        VBox v2 = new VBox(lb2);
-        VBox v3 = new VBox(lb3);
-        VBox v4 = new VBox(lb4);
-        VBox v5 = new VBox(lb5);
-
-        v1.setAlignment(Pos.CENTER);
-        v2.setAlignment(Pos.CENTER);
-        v3.setAlignment(Pos.CENTER);
-        v4.setAlignment(Pos.CENTER);
-        v5.setAlignment(Pos.CENTER);
-
-        v1.setStyle("-fx-background-color : #FF3547;");
-        v2.setStyle("-fx-background-color : #512DA8;");
-        v3.setStyle("-fx-background-color : #48CFAD;");
-        v4.setStyle("-fx-background-color : #02C852;");
-        v5.setStyle("-fx-background-color : #EC407A;");
-
-        return FXCollections.observableArrayList(v1, v2, v3, v4, v5);
     }
 
     private void composeLayout(){
@@ -512,4 +461,13 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
         timer.cancel();
         timer.purge();
     }
+
+//    private VBox createSample(){
+//        Label lb1 = new Label("Sample");
+//        lb1.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
+//        VBox vSample = new VBox(lb1);
+//        vSample.setAlignment(Pos.CENTER);
+//        vSample.setStyle("-fx-background-color : rgba(0,0,0,.2);");
+//        return vSample;
+//    }
 }

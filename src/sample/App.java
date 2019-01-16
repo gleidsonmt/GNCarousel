@@ -39,28 +39,22 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         GNCarousel carousel = new GNCarousel();
-//        carousel.setVelocity(Duration.millis(500D));
 //        carousel.getItems().setAll(createItems());
-//        carousel.setVisibleArrows(true);
+        carousel.setArrows(true);
         carousel.setAutoRide(true);
+
         Scene scene = new Scene(new StackPane(carousel), 600, 400);
         stage.setScene(scene);
         stage.show();
 
-        new Button();
-        new Spinner<>();
-        new DatePicker();
+//        Label odd = new Label("Six");
+//        odd.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
+//        VBox v1 = new VBox(odd);
+//        v1.setStyle("-fx-background-color : Yellow;");
+//        v1.setAlignment(Pos.CENTER);
+//        carousel.getItems().add(v1);
 
-
-
-        Label odd = new Label("Six");
-        odd.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
-        VBox v1 = new VBox(odd);
-        v1.setStyle("-fx-background-color : Yellow;");
-        v1.setAlignment(Pos.CENTER);
-        carousel.getItems().add(v1);
-
-        ScenicView.show(scene);
+//        ScenicView.show(scene);
 
     }
 
