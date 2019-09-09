@@ -39,7 +39,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         GNCarousel carousel = new GNCarousel();
-//        carousel.getItems().setAll(createItems());
+        carousel.getItems().setAll(createItems());
         carousel.setArrows(true);
 //        carousel.setAutoRide(true);
 //
@@ -57,7 +57,7 @@ public class App extends Application {
 
 
 
-//        ScenicView.show(scene);
+        ScenicView.show(scene);
 
     }
 
@@ -69,13 +69,15 @@ public class App extends Application {
         Label lb4 = new Label("Fourth");
         Label lb5 = new Label("Fifth");
 
+        Button btn = new Button("Pedir agora");
+
         lb1.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
         lb2.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
         lb3.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
         lb4.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
         lb5.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
 
-        VBox v1 = new VBox(lb1);
+        VBox v1 = new VBox(lb1, btn);
         VBox v2 = new VBox(lb2);
         VBox v3 = new VBox(lb3);
         VBox v4 = new VBox(lb4);
