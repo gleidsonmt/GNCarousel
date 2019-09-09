@@ -30,7 +30,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -38,7 +41,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.util.Objects;
@@ -49,6 +51,7 @@ import java.util.TimerTask;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  01/01/2019
  */
+@SuppressWarnings("unused")
 public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehavior> {
 
     private AnchorPane  container = new AnchorPane();
@@ -61,8 +64,6 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
     private HBox        indicators;
     private ToggleGroup group;
     private VBox        wrapper;
-    private Text        title;
-    private Text        subtitle;
 
     private Timeline    transition  = new Timeline();
     private Timer       timer = new Timer();
@@ -79,7 +80,7 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
     private EventHandler<MouseEvent> entered = event -> cancelTimer();
     private EventHandler<MouseEvent> exited = event -> createNewTimer();
 
-    protected GNCarouselSkin(GNCarousel control) {
+    GNCarouselSkin(GNCarousel control) {
 
         super(control, new GNCarouselBehavior(control));
 
@@ -106,8 +107,6 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
         this.right_arrow = new SVGPath();
         this.group = new ToggleGroup();
         this.wrapper = new VBox();
-        this.title = new Text();
-        this.subtitle = new Text();
 
         this.container.getStyleClass().add("container");
         this.currentView.getStyleClass().add("current-view");
@@ -118,8 +117,6 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
         this.right_arrow.getStyleClass().add("right-arrow");
         this.left_arrow.getStyleClass().add("left-arrow");
         this.wrapper.getStyleClass().add("wrapper");
-        this.title.getStyleClass().add("title");
-        this.subtitle.getStyleClass().add("sub-title");
 
         this.indicators.setAlignment(Pos.CENTER);
         this.wrapper.setAlignment(Pos.CENTER);
@@ -144,9 +141,7 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
         initListener();
         next(); // add first view
 
-        items.addListener((ListChangeListener<Node>) c -> {
-            initListener();
-        });
+        items.addListener((ListChangeListener<Node>) c -> initListener());
 
         right_button.setOnMouseClicked(event -> {
             if(event.getClickCount() != 2){
@@ -240,7 +235,8 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
     private void composeLayout(){
         this.getChildren().add(container);
 
-        this.wrapper.getChildren().addAll(title, subtitle, indicators);
+        this.wrapper.getChildren().addAll(indicators);
+        this.wrapper.setPrefHeight(40);
         this.container.getChildren().addAll( nextView, currentView, wrapper, right_button, left_button); // removing bugs
 
         this.left_button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
