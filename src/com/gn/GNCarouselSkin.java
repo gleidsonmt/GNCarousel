@@ -241,7 +241,7 @@ public class GNCarouselSkin extends BehaviorSkinBase<GNCarousel, GNCarouselBehav
         this.getChildren().add(container);
 
         this.wrapper.getChildren().addAll(title, subtitle, indicators);
-        this.container.getChildren().addAll(currentView, nextView, wrapper, right_button, left_button);
+        this.container.getChildren().addAll( nextView, currentView, wrapper, right_button, left_button); // removing bugs
 
         this.left_button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         this.right_button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
