@@ -1,0 +1,71 @@
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.13' // here // 0.0.10
+    id 'org.beryx.jlink' version '2.25.0' // here // 2.24.1
+}
+
+group 'io.github.gleidsonmt.gncarousel'
+version '1.0.4'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://jitpack.io'
+    }
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+ext {
+    junitVersion = '5.8.2'
+}
+
+application {
+    mainModule = 'io.github.gleidsonmt.gncarousel'
+    mainClass = 'io.github.gleidsonmt.gncarousel.Sample2'
+}
+
+javafx {
+    version = '18.0.2' // here 18
+    modules = ['javafx.controls',
+               'javafx.fxml',
+               'javafx.web',
+               'javafx.graphics',
+               "javafx.swing"]
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:24.0.1'
+}
+
+jlink {
+    imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = 'App'
+    }
+
+    jpackage {
+        installerType = 'exe'
+        installerOptions += '--verbose'
+        installerOptions = [
+                '--description', "Project GNCarousel.",
+                '--copyright', 'Copyrigth © 2019-2023 GLEIDSON NEVES DA SILVEIRA'
+//                'win-console', 'true'
+//                , '--icon', 'logoT.ico'
+
+        ]
+        addExtraDependencies("javafx")
+    }
+}
+
+jlinkZip {
+    group = 'distribution'
+}

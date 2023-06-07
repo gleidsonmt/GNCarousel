@@ -1,67 +1,43 @@
-/*
- * Copyright (C) Gleidson Neves da Silveira
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-package sample;
+package io.github.gleidsonmt.gncarousel;
 
-import com.gn.GNCarousel;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.scenicview.ScenicView;
+
+import java.io.IOException;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
- * Create on  19/11/2018
- * Version 1.0
+ * Create on  06/06/2023
  */
-public class App extends Application {
+public class Sample2 extends Application {
 
     @Override
-    public void start(Stage stage) {
-        GNCarousel carousel = new GNCarousel();
-        carousel.getItems().setAll(createItems());
-        carousel.setArrows(true);
-//        carousel.setAutoRide(true);
-//
-//        Label odd = new Label("Six");
-//        odd.setStyle("-fx-text-fill : white; -fx-font-size : 24px;");
-//        VBox v1 = new VBox(odd);
-//        v1.setStyle("-fx-background-color : yellow;");
-//        v1.setAlignment(Pos.CENTER);
-//        carousel.getItems().add(new Label("dfasdf"));
-//        carousel.getItems().add(v1);
+    public void start(Stage stage) throws IOException {
 
-        Scene scene = new Scene(new StackPane(carousel), 600, 400);
+
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("test.fxml")
+        );
+
+        Scene scene = new Scene(loader.load(), 600, 400);
         stage.setScene(scene);
         stage.show();
 
-
-
-        ScenicView.show(scene);
-
     }
 
-    private ObservableList<Node> createItems(){
+
+    private ObservableList<Node> createItems() {
 
         Label lb1 = new Label("First");
         Label lb2 = new Label("Second");
@@ -102,3 +78,4 @@ public class App extends Application {
         launch(args);
     }
 }
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import io.github.gleidsonmt.gncarousel.GNCarousel?>
+<?import javafx.collections.FXCollections?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           prefHeight="400.0" prefWidth="600.0">
+    <GNCarousel>
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+
+                <Label text="First"/>
+                <Label text="Second"/>
+                <Label text="Third"/>
+
+            </FXCollections>
+        </items>
+    </GNCarousel>
+</StackPane>

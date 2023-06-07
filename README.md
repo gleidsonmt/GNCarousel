@@ -41,7 +41,7 @@ carousel.setItems(createItems());
 
 ```java
  -gn-auto-ride : true;
- -gn-transition-duration : 300m;
+ -gn-transition-duration : 300ms;
 ```
 <h1></h1>
 

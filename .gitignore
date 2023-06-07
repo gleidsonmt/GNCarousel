@@ -1,5 +1,6 @@
 ./gitignore
 .idea/**
+.gradle/**
 /out/**
 /documentation/**
 /META-INF/**
